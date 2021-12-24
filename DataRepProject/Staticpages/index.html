@@ -1,0 +1,250 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+                
+            <style>
+                    th {background-color:rgba(85, 152, 240, 0.534); text-align: center;}
+                    td {text-align: center;}
+            </style>
+    </head>
+
+
+
+    <body style ="background-color:rgba(31, 70, 143, 0.301)">
+        
+
+        <div id="Create-update" style ="display:none"  class="col text-center" >
+        <h2>Create-Update</h2>
+        <table id = "CreateUpdateForm" class =" table table-striped table-hover container" >
+                <tr><th>Name</th><th>Value</th></tr>
+            <tr>
+                <td style="font-weight:bold">Part ID</td>
+                <td><input type="text" name="part_ID" id = "idInput"></td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Part Name</td>
+                <td><input type="text" name="part_name"></td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Checked in By</td>
+                <td><input type="email" name="checkedInBy"></td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold">Quantity</td>
+                <td><input type="number" name="quantity"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class = "btn-group mr-2" role="group" aria-label="First group">
+                        <button id ="Create-Button" onclick="doCreate()" type="button" class="btn btn-primary">Create Part</button>
+                        <button id ="Update-Button" onclick="doUpdate()" class="btn btn-primary">Update</button>
+                        <button id="refresh-button" onclick="history.go(0)" type="button" class="btn btn-danger">Go Back</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div id = "display" class="col text-center" >
+            <h2 style ="text-align:center" > Equipment</h2> 
+           
+            <table id = partTable class = "table table-hover table-sm table-striped ">
+                <tr>
+                    <th>Part ID</th><th>Part Name</th><th>Checked in By</th><th>Quantity</th><th></th><th></th>
+                </tr>
+
+            </table>
+            <button onclick="showCreate()" class="btn btn-success btn-sm" >Add New Part</button>
+
+        </div>
+    
+            <script>
+                function showCreate(){
+                    document.getElementById('display').style.display = "none"
+                    document.getElementById('Update-Button').style.display = "none"
+                    document.getElementById('Create-Button').style.display = "block"
+                    document.getElementById('Create-update').style.display = "block"
+                }
+
+                function showUpdate(thisElem){
+                    var rowElement = thisElem.parentNode.parentNode;
+                    part = readpartFromRow(rowElement)
+                    populateForm(part)
+
+
+                    document.getElementById('display').style.display = "none"
+                    document.getElementById('Update-Button').style.display = "block"
+                    document.getElementById('Create-Button').style.display = "none"
+                    document.getElementById('Create-update').style.display = "block"
+                }
+                
+                function readpartFromRow(rowElement){
+                    part = {}
+                    part.part_ID = rowElement.getAttribute("id");
+                    part.part_name = rowElement.cells[1].firstChild.textContent
+                    part.checkedInBy = rowElement.cells[2].firstChild.textContent
+                    part.quantity = rowElement.cells[3].firstChild.textContent
+
+                    return part
+                }
+
+                function populateForm(part){
+                    var form = document.getElementById('CreateUpdateForm')
+
+                    form.querySelector('input[name="part_ID"]').value = part.part_ID
+                    form.querySelector('input[name="part_ID"]').disabled = true
+
+                    form.querySelector('input[name="part_name"]').value = part.part_name
+                    form.querySelector('input[name="checkedInBy"]').value =  part.checkedInBy
+                    form.querySelector('input[name="quantity"]').value = part.quantity
+
+                }
+
+                function clearForm(){
+                    var form = document.getElementById('CreateUpdateForm')
+
+
+                    form.querySelector('input[name="part_ID"]').value = ''
+                    form.querySelector('input[name="part_ID"]').diabled = false
+
+
+                    form.querySelector('input[name="part_name"]').value = ''
+                    form.querySelector('input[name="checkedInBy"]').value =  ''
+                    form.querySelector('input[name="quantity"]').value = ''
+
+                }
+
+                function doCreate(){
+                    part = getpartFromForm()
+                    $.ajax({
+                        url:"/Equipment",
+                        data:JSON.stringify(part),
+                        method:"POST",
+                        dataType:"JSON",
+                        contentType:"application/json; charset=utf-8",
+                        success:function(result){
+                            console.log(result)
+                            addpartToTable(part);
+                            showDisplay()
+                            clearForm()
+                        },
+                        error:function(xhr,status, error){
+                            alert("####ERROR : INCORRECT FORMAT####\n\nPossible Causes : \n- Part Number left blank \n- Already in use  \n- Non integer characters included \n\nPlease enter a part number that is not in the Database")
+                            console.log ('error:'+ status + 'msg:' +error)
+                        }
+                    });
+                }
+                
+                function doUpdate(){
+                    part = getpartFromForm()
+                    updateServer(part)
+                    updateTableRow(part)
+                    showDisplay()
+                }
+
+                function updateServer(){
+                    $.ajax({
+                        url:"/Equipment/"+ part.part_ID,
+                        data:JSON.stringify(part),
+                        method:"PUT",
+                        dataType:"JSON",
+                        contentType: "application/json; charset=utf-8",
+                        success:function(result){
+                            console.log(result)
+                            updateTableRow(part);
+                            showDisplay()
+                            clearForm()
+                        },
+                        error:function(xhr,status, error){
+                            alert("***ERROR***\nServer Failed to update")
+                            console.log ('error:'+ status + 'msg:' +error)
+                        }
+                    })  
+                }
+
+
+                function doDelete(thisElem){
+                    var tableElement = document.getElementById('partTable');
+                    var rowElement = thisElem.parentNode.parentNode;
+                    var index = rowElement.rowIndex;
+                    part_ID = rowElement.getAttribute("id");
+                    //console.log(part_ID)
+                    $.ajax({
+                        url:"/Equipment/"+part_ID,
+                        method:"DELETE",
+                        dataType:"JSON",
+                        success:function(result){
+                            tableElement.deleteRow(index);  
+                        },
+                        error:function(xhr,status, error){
+                            console.log ('error:'+ status + 'msg:' +error)
+                        }
+                    });
+
+                }
+                
+                function updateTableRow(part){
+                    rowElement = document.getElementById(part.part_ID)
+                    rowElement.cells[1].firstChild.textContent = part.part_name
+                    rowElement.cells[2].firstChild.textContent = part.checkedInBy
+                    rowElement.cells[3].firstChild.textContent = part.quantity
+
+                }
+
+                function getpartFromForm(){
+                    var form = document.getElementById('CreateUpdateForm')
+                    var part = {}
+                    part.part_ID = form.querySelector('input[name="part_ID"]').value
+                    part.part_name = form.querySelector('input[name="part_name"]').value
+                    part.checkedInBy = form.querySelector('input[name="checkedInBy"]').value
+                    part.quantity = form.querySelector('input[name="quantity"]').value
+                    // console.log(part)
+                    return part
+                }
+
+                function showDisplay(){
+                    document.getElementById('display').style.display = "block"
+                    document.getElementById('Create-update').style.display = "none"
+                }
+
+                function populateTable(){
+                    //ajax getAll
+                    $.ajax({
+                        url:'http://127.0.0.1:5000/Equipment',
+                        method :'GET',
+                        datatype:'JSON',
+                        success:function(results){
+                            for (part of results){
+                                addpartToTable(part);
+                            }
+                        },
+                        error:function(xhr,status, error){
+                            console.log ('error:'+ status + 'msg:' +error)
+                        }
+                    });
+
+                }
+                function addpartToTable(part){
+                // console.log("Working so far")
+                tableElem = document.getElementById("partTable")
+                rowElem = tableElem.insertRow(-1)
+                rowElem.setAttribute("id",part.part_ID)
+                cell1 = rowElem.insertCell(0)
+                cell1.innerHTML = part.part_ID
+                cell2 = rowElem.insertCell(1)
+                cell2.innerHTML = part.part_name
+                cell3 = rowElem.insertCell(2)
+                cell3.innerHTML = part.checkedInBy
+                cell4 = rowElem.insertCell(3)
+                cell4.innerHTML = part.quantity
+                cell5 = rowElem.insertCell(4)
+                cell5.innerHTML = '<button onclick="showUpdate(this)"class="btn btn-Secondary btn-sm">Update</button>'
+                cell6 = rowElem.insertCell(5)
+                cell6.innerHTML = '<button onclick="doDelete(this)" class="btn btn-danger btn-sm">Delete</button>'
+                }
+                populateTable()
+            </script>
+    </body>
+</html>
