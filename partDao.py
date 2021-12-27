@@ -1,14 +1,14 @@
 import mysql.connector
+import dbconfig as cfg
+
 class partDAO:
     db=""
     def __init__(self): 
         self.db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="MaeveD29",
-        #user="datarep",  # this is the user name on my mac
-        #passwd="password" # for my mac
-        database="datarepresentation"
+        host= cfg.mysql['host'],
+        user= cfg.mysql['username'],
+        password= cfg.mysql['password'],
+        database= cfg.mysql['database']
         )
     def create(self, part):
         cursor = self.db.cursor()
@@ -25,7 +25,7 @@ class partDAO:
 
     def getAll(self):
         cursor = self.db.cursor()
-        sql="select * from Equipment"
+        sql="select * from Equipment ORDER BY part_ID"
         cursor.execute(sql)
         result = cursor.fetchall()
         returnArray = []

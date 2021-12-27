@@ -5,11 +5,9 @@ app = Flask(__name__, static_url_path='', static_folder='staticpages')
 
 @app.route('/')
 def index():
-    return "hello"
+    return  "is this thing on?"
+
 #get all
-
-
-
 @app.route('/Equipment')
 def getAll():
     return jsonify(partDAO.getAll())

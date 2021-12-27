@@ -5,79 +5,94 @@
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
                 
             <style>
-                    th {background-color:rgba(85, 152, 240, 0.534); text-align: center;}
+                    th {background-color:rgba(7, 5, 36, 0.973); text-align: center; color:rgb(255, 255, 255)}
                     td {text-align: center;}
+                    #navbar {height:60px; width:100%; border-radius:5px;opacity:0.25;position:fixed;background-image:url("https://preview.pixlr.com/images/800wm/100/1/1001466917.jpg" );}
+
             </style>
     </head>
 
-
-
-    <body style ="background-color:rgba(31, 70, 143, 0.301)">
+    <body style ="background-color:rgba(114, 139, 187, 0.562)">
         
+        <!-- Main Container -->
+        <div id = "navbar">                           
+    
+        </div>
 
         <div id="Create-update" style ="display:none"  class="col text-center" >
-        <h2>Create-Update</h2>
-        <table id = "CreateUpdateForm" class =" table table-striped table-hover container" >
+        <h2 id= "Create_Head"><b>Create Part</b></h2>
+        <h2 id= "Update_Head"><b>Update Part Details</b></h2>
+        
+        <table id = "CreateUpdateForm" class =" table table-striped table-hover container " >
                 <tr><th>Name</th><th>Value</th></tr>
             <tr>
                 <td style="font-weight:bold">Part ID</td>
-                <td><input type="text" name="part_ID" id = "idInput"></td>
+                <td><input type="text" name="part_ID" id = "idInput" title="Must be an Integer that is not already in the database"></td>
             </tr>
             <tr>
                 <td style="font-weight:bold">Part Name</td>
-                <td><input type="text" name="part_name"></td>
+                <td><input type="text" name="part_name" title="Enter the Part name"></td>
             </tr>
             <tr>
                 <td style="font-weight:bold">Checked in By</td>
-                <td><input type="email" name="checkedInBy"></td>
+                <td><input type="email" name="checkedInBy" title="Please Enter your name"></td>
             </tr>
             <tr>
                 <td style="font-weight:bold">Quantity</td>
-                <td><input type="number" name="quantity"></td>
+                <td><input type="number" name="quantity" title="Quantity of parts in stock"></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
                     <div class = "btn-group mr-2" role="group" aria-label="First group">
-                        <button id ="Create-Button" onclick="doCreate()" type="button" class="btn btn-primary">Create Part</button>
-                        <button id ="Update-Button" onclick="doUpdate()" class="btn btn-primary">Update</button>
-                        <button id="refresh-button" onclick="history.go(0)" type="button" class="btn btn-danger">Go Back</button>
+                        <button id ="Create-Button" onclick="doCreate()" type="button" class="btn btn-primary badge-pill">Create Part</button>
+                        <button id ="Update-Button" onclick="doUpdate()" class="btn btn-info btn-pill">Update Part</button>
+                        <button id="refresh-button" onclick="history.go(0)" type="button" class="btn btn-danger badge-pill">Go Back</button>
                     </div>
                 </td>
             </tr>
         </table>
         </div>
+ 
         <div id = "display" class="col text-center" >
-            <h2 style ="text-align:center" > Equipment</h2> 
+            <h2 style ="text-align:center;color:rgba(7, 5, 36, 0.973)" > <b>Parts Stock</b></h2> 
            
-            <table id = partTable class = "table table-hover table-sm table-striped ">
+            <table id = partTable class = "table table-hover table-sm  ">
                 <tr>
                     <th>Part ID</th><th>Part Name</th><th>Checked in By</th><th>Quantity</th><th></th><th></th>
                 </tr>
 
             </table>
-            <button onclick="showCreate()" class="btn btn-success btn-sm" >Add New Part</button>
+            <button onclick="showCreate()" class="btn btn-success btn-sm btn-block badge-pill" >Add New Part</button>
 
         </div>
     
             <script>
                 function showCreate(){
+                    console.log("Show Create")
+                    clearForm()
                     document.getElementById('display').style.display = "none"
                     document.getElementById('Update-Button').style.display = "none"
                     document.getElementById('Create-Button').style.display = "block"
                     document.getElementById('Create-update').style.display = "block"
+                    document.getElementById('Update_Head').style.display = "none"
+                    document.getElementById('Create_Head').style.display = "block"
+
                 }
 
                 function showUpdate(thisElem){
+                    console.log("Show Update")
+
                     var rowElement = thisElem.parentNode.parentNode;
                     part = readpartFromRow(rowElement)
                     populateForm(part)
-
 
                     document.getElementById('display').style.display = "none"
                     document.getElementById('Update-Button').style.display = "block"
                     document.getElementById('Create-Button').style.display = "none"
                     document.getElementById('Create-update').style.display = "block"
+                    document.getElementById('Update_Head').style.display = "block"
+                    document.getElementById('Create_Head').style.display = "none"                
                 }
                 
                 function readpartFromRow(rowElement){
@@ -105,10 +120,8 @@
                 function clearForm(){
                     var form = document.getElementById('CreateUpdateForm')
 
-
                     form.querySelector('input[name="part_ID"]').value = ''
-                    form.querySelector('input[name="part_ID"]').diabled = false
-
+                    form.querySelector('input[name="part_ID"]').disabled = false
 
                     form.querySelector('input[name="part_name"]').value = ''
                     form.querySelector('input[name="checkedInBy"]').value =  ''
@@ -117,6 +130,8 @@
                 }
 
                 function doCreate(){
+                    console.log("Do Create")
+
                     part = getpartFromForm()
                     $.ajax({
                         url:"/Equipment",
@@ -129,18 +144,20 @@
                             addpartToTable(part);
                             showDisplay()
                             clearForm()
+                            history.go(0)
                         },
                         error:function(xhr,status, error){
                             alert("####ERROR : INCORRECT FORMAT####\n\nPossible Causes : \n- Part Number left blank \n- Already in use  \n- Non integer characters included \n\nPlease enter a part number that is not in the Database")
                             console.log ('error:'+ status + 'msg:' +error)
                         }
                     });
+                    
                 }
                 
                 function doUpdate(){
                     part = getpartFromForm()
-                    updateServer(part)
                     updateTableRow(part)
+                    updateServer(part)
                     showDisplay()
                 }
 
@@ -163,7 +180,6 @@
                         }
                     })  
                 }
-
 
                 function doDelete(thisElem){
                     var tableElement = document.getElementById('partTable');
@@ -240,9 +256,9 @@
                 cell4 = rowElem.insertCell(3)
                 cell4.innerHTML = part.quantity
                 cell5 = rowElem.insertCell(4)
-                cell5.innerHTML = '<button onclick="showUpdate(this)"class="btn btn-Secondary btn-sm">Update</button>'
+                cell5.innerHTML = '<button onclick="showUpdate(this)"class="btn btn-info badge-pill btn-sm">Update</button>'
                 cell6 = rowElem.insertCell(5)
-                cell6.innerHTML = '<button onclick="doDelete(this)" class="btn btn-danger btn-sm">Delete</button>'
+                cell6.innerHTML = '<button onclick="doDelete(this)" class="btn btn-danger badge-pill btn-sm">Delete</button>'
                 }
                 populateTable()
             </script>
