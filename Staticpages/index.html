@@ -68,6 +68,7 @@
         </div>
     
             <script>
+                host = window.location.origin
                 function showCreate(){
                     console.log("Show Create")
                     clearForm()
@@ -228,7 +229,7 @@
                 function populateTable(){
                     //ajax getAll
                     $.ajax({
-                        url:'http://127.0.0.1:5000/Equipment',
+                        url: host+'/Equipment',
                         method :'GET',
                         datatype:'JSON',
                         success:function(results){

@@ -1,7 +1,9 @@
 from flask import Flask, url_for, request, redirect, abort, jsonify
+from flask_cors import CORS
 from partDao import partDAO
 
 app = Flask(__name__, static_url_path='', static_folder='staticpages')
+CORS(app)
 
 @app.route('/')
 def index():
