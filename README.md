@@ -10,10 +10,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/colmhiggs11/Machine_Learning_21_CH">
-  
   </a>
-
-<h1 align="center">data-representation-project </h1>
+  
+<h1 align="center">Data Representation Flask App project  </h1>
 
   <img alt="img" src="https://miro.medium.com/max/792/1*lJ32Bl-lHWmNMUSiSq17gQ.png" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
