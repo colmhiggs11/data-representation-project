@@ -1,13 +1,9 @@
 from flask import (
     Flask,
-    g,
-    redirect,
     render_template,
     request, 
-    session,
     abort, 
     jsonify,
-    url_for
 )
 import pyautogui as pag
 from partDao import partDAO
@@ -17,12 +13,13 @@ app = Flask(__name__, static_url_path='', static_folder='staticpages', template_
 @app.route("/", methods=['GET', 'POST'])
 def login():
     
-    if (request.form.get('username', False) == 'admin' and request.form.get('password', False) == 'admin' or
-        request.form.get('username', False) == 'colm' and request.form.get('password', False) == 'password'or
-        request.form.get('username', False) == 'andrew' and request.form.get('password', False) == 'datarep'):
-        return render_template("/index.html")
-    else:
-        pag.alert(text="## Incorrect Password! ##", title="Login Screen")
+    if request.method == 'POST':
+        if (request.form.get('username', False) == 'admin' and request.form.get('password', False) == 'admin' or
+            request.form.get('username', False) == 'colm' and request.form.get('password', False) == 'password'or
+            request.form.get('username', False) == 'andrew' and request.form.get('password', False) == 'datarep'):
+            return render_template("/index.html")
+        else:
+            pag.alert(text="## Incorrect Password!\nPlease try again. ##", title="Login Screen")
 
     return render_template("login.html")
 

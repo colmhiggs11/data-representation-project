@@ -39,6 +39,7 @@
 2. <a href="#2-getting-started">Getting Started</a>
     - <a href="#prerequisites">Prerequisites</a>
     - <a href="#installation">Installation</a>
+    - <a href="#passwords">Passwords</a>
 
 3. <a href="#6-license">License</a>
 
@@ -46,32 +47,32 @@
 ## 1. About The Project
 
 ### Project Description
-- Scikit - Learn
-    - Demonstrations of three interesting scikit-learn algorithms.
-- Scipy Stats
-    - A clear and concise overview of the scipy.stats. 
+Project requires a minimum of the below:
+- Write a program that demonstrates that you understand creating and consuming RESTful APIs.
+- Needs to consist of the following :
+  - A basic Flask server
+  - REST API, (to perform CRUD operations)
+  - One database table
+  - Accompanying web interface, using AJAX calls, to perform these CRUD operations
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### In this repository
 
-* [README.md](https://github.com/colmhiggs11/Machine_Learning_21_CH#readme) *(Layout and details of the project)*
-* [Scikit-Learn.ipynb](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Scikit-Learn.ipynb) *(Scikit Learn Jupyter Notebook)*
+* [README.md](https://github.com/colmhiggs11/data-representation-project/blob/main/README.md) *(Layout and details of the project)*
+* [partDao.py](https://github.com/colmhiggs11/data-representation-project/blob/main/partDao.py) *(Scikit Learn Jupyter Notebook)*
 
-* [Scipy_Stats.ipynb](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Scipy_Stats.ipynb)  *(Scipy Stats Jupyter Notebook)*
-
+* [server.py](https://github.com/colmhiggs11/data-representation-project/blob/main/server.py)  *(Scipy Stats Jupyter Notebook)*
 
 **Other items**
-* [Data](https://github.com/colmhiggs11/Machine_Learning_21_CH/tree/main/Data)
-    * __SciKit Learn__
-    * [MC.csv](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Data/MC.csv) *(Data File for the analysis of KNN algorithm)*
-    * [data.csv](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Data/data.csv) *(Data file for analysis in Scikit Learn)*
-    * __SciPy Stats__
-    * [StudentPerformance.csv](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Data/StudentPerformance.csv) *(Data File for ANOVA analysis)*
+* [Staticpages](https://github.com/colmhiggs11/data-representation-project/tree/main/Staticpages)
+    * [index.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/index.html) *(Data File for the analysis of KNN algorithm)*
+    * [login.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/login.html) *(Data file for analysis in Scikit Learn)*
 
-* [Images used](https://github.com/colmhiggs11/Machine_Learning_21_CH/tree/main/Images)
-* [License](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/LICENSE) *(MIT License)*    
-* [Requirments.txt](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Requirements.txt)
+* [dbconfigtemplate.py](https://github.com/colmhiggs11/data-representation-project/blob/main/dbconfigtemplate.py)
+* [LICENSE](https://github.com/colmhiggs11/data-representation-project/blob/main/LICENSE) *(MIT License)*    
+* [requirments.txt](https://github.com/colmhiggs11/data-representation-project/blob/main/requirements.txt)
+* [initdb.sql](https://github.com/colmhiggs11/data-representation-project/blob/main/initdb.sql)
 * .gitignore
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -80,31 +81,44 @@
 <!-- GETTING STARTED -->
 ## 2. Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This section will show how to set up the project on your local PC. At a later stage Pythonanywhere will be utilised to host the Flask server.
 
 ### **Prerequisites**
 
-The libraries and packages that need to be installed for running this code are shown in requirements.txt, you will also need to either have access to anaconda/python in another form to work on the actual file, access to a web browser where you can work on your own copy of the version using binder. This will not update/save the notebook unless you copy the code down. You can also look at a rendered view of the notebook by clicking the badges in the follwoing links. [Scikit-Learn.ipynb](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Scikit-Learn.ipynb) , [Scipy_Stats.ipynb](https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Scipy_Stats.ipynb).
+The libraries and packages that need to be installed for running this code are shown in requirements.txt, you will also need to either have access to anaconda/python and access to the browser   to work on the actual file.
 
 
 ### **Installation**
 
 1. If you have anaconda installed, go to the command line and complete step 2.
+
 2. Clone the repo
    ```sh
-   git clone https://github.com/colmhiggs11/Machine_Learning_21_CH.git
+   git clone https://github.com/colmhiggs11/data-representation-project
    ```
-3. Open Jupyter lab
+3.  From here ensure all of the items in the requirments.txt file are installed. If any of them are missing or need to be updated use the following command.
+    ```sh
+    pip install-r requirements.txt 
+    ```
+4. Use the [initdb.sql](https://github.com/colmhiggs11/data-representation-project/blob/main/initdb.sql) file to set up the database and tables for App.
+
+4. Run the server.py file as shown
    ```sh
-   jupyter lab
+   python server.py 
    ```
-4. This will open the Jupyter Notebookin the browser. From here ensure all of the items in the requirments.txt file are installed. If any of them are missing or need to be updated use the following command.
-   ```sh
-   pip install-r requirements.txt 
-   ```
+4. This will start the Flask app server at http://127.0.0.1:5000/ . Copy and Paste this url into the browser an this will open the login page for the Flask App. Passwords to progress to database page are show below. 
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+### **Passwords**
+The passwords below will allow the user to move from the login page into the database and perform CRUD operations on the data.
+
+|Username|Password|
+|:-------------:|:-------------:|
+|colm|password|   
+|admin|admin|   
+|andrew|datarep|   
 
 ---
 
