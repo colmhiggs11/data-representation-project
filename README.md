@@ -102,6 +102,8 @@ The libraries and packages that need to be installed for running this code are s
     ```
 4. Use the [initdb.sql](https://github.com/colmhiggs11/data-representation-project/blob/main/initdb.sql) file to set up the database and tables for App.
 
+4. Use the [dbconfigtemplate.py](https://github.com/colmhiggs11/data-representation-project/blob/main/dbconfigtemplate.py) and edit the details to your own credentials. Also save the file as **dbcongif.py**
+
 4. Run the server.py file as shown
    ```sh
    python server.py 
