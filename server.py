@@ -1,30 +1,45 @@
-from flask import Flask, url_for, request, redirect, abort, jsonify
-from flask_cors import CORS
+from flask import (
+    Flask,
+    g,
+    redirect,
+    render_template,
+    request, 
+    session,
+    abort, 
+    jsonify,
+    url_for
+)
+import pyautogui as pag
 from partDao import partDAO
 
-app = Flask(__name__, static_url_path='', static_folder='staticpages')
-CORS(app)
+app = Flask(__name__, static_url_path='', static_folder='staticpages', template_folder='staticpages')
 
-@app.route('/')
-def index():
-    return  "is this thing on?"
+@app.route("/", methods=['GET', 'POST'])
+def login():
+    
+    if (request.form.get('username', False) == 'admin' and request.form.get('password', False) == 'admin' or
+        request.form.get('username', False) == 'colm' and request.form.get('password', False) == 'password'or
+        request.form.get('username', False) == 'andrew' and request.form.get('password', False) == 'datarep'):
+        return render_template("/index.html")
+    else:
+        pag.alert(text="## Incorrect Password! ##", title="Login Screen")
+
+    return render_template("login.html")
 
 #get all
 @app.route('/Equipment')
 def getAll():
     return jsonify(partDAO.getAll())
+
+
 # find By id
-
-
 @app.route('/Equipment/<int:part_ID>')
 def findById(part_ID):
     return jsonify(partDAO.findByID(part_ID))
 
 
 # create
-# curl -X POST -d "{\"part_name\":\"test\", \"checkedInBy\":\"some guy\", \"quantity\":123}" http://127.0.0.1:5000/ Equipment
-
-
+# curl -X POST -d "{\"part_name\":\"test\", \"checkedInBy\":\"some guy\", \"quantity\":123}" http://127.0.0.1:5000/Equipment
 @app.route('/Equipment', methods=['POST'])
 def create():
     
@@ -42,7 +57,7 @@ def create():
     return "served by Create "
 
 #update
-# curl -X PUT -d "{\"part_name\":\"new part_name\", \"quantity\":999}" -H "content-type:application/json" http://127.0.0.1:5000/ Equipment/1
+# curl -X PUT -d "{\"part_name\":\"new part_name\", \"quantity\":999}" -H "content-type:application/json" http://127.0.0.1:5000/Equipment/1
 
 @app.route('/Equipment/<int:part_ID>', methods=['PUT'])
 def update(part_ID):
@@ -62,7 +77,7 @@ def update(part_ID):
     return jsonify(currentpart)
 
 #delete
-# curl -X DELETE http://127.0.0.1:5000/ Equipment/1
+# curl -X DELETE http://127.0.0.1:5000/Equipment/1
 @app.route('/Equipment/<int:part_ID>', methods=['DELETE'])
 def delete(part_ID):
     partDAO.delete(part_ID)

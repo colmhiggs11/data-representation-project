@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--- Login page --->
+    <!--- CREDIT: https://github.com/PrettyPrinted/youtube_video_code/blob/master/2020/02/10/Creating%20a%20Login%20Page%20in%20Flask%20Using%20Sessions/flask_session_example/templates/login.html --->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  
+    <style>
+        #label {color:rgb(255, 255, 255)}
+
+    </style>
+
+  </head>
+
+  <body >
+    <section class="hero is-info is-fullheight">
+      <div class="hero-body" style ="background-color:rgba(114, 140, 187, 0.842); background-image:url(https://wallpaper.dog/large/999948.jpg); background-repeat: no-repeat; background-attachment: fixed;  background-size: cover; image-rendering: -webkit-optimize-contrast;" >
+        <div class="container">
+          <div class="columns is-centered" >
+            <div class="column is-half" style ="background-color:rgba(7, 5, 36, 0.973)">
+              <h1 style ="text-align:center;color:rgba(255, 255, 255, 0.973)"><b>C & M LTD - LOGIN</b></h1>
+              <form method="POST">
+                <div class="field" >
+                  <label class="label" id="label">Username</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="text" name="username" placeholder="Username">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" id="label">Password</label>
+                  <p class="control has-icons-left">
+                    <input class="input" type="password" name="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control">
+                    <button type="submit" class="button is-success is-fullwidth is-rounded ">
+                      Login
+                    </button>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  </html>

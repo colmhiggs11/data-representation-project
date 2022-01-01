@@ -6,7 +6,6 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -16,13 +15,13 @@
 
 <h1 align="center">data-representation-project </h1>
 
-  <img alt="SciKit" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1200px-Scikit_learn_logo_small.svg.png" width="25%">
+  <img alt="img" src="https://miro.medium.com/max/792/1*lJ32Bl-lHWmNMUSiSq17gQ.png" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="SciPy" src="https://nlaongtup.github.io/post/scipy-lammps/featured.png" width="25%">
+  <img alt="img" src="https://devopedia.org/images/article/140/9072.1547744489.png" width="30%">
 </p>
 
 <p align="center">
-     Machine Learning and Statistics project to analyse SciKit Learn and SciPy stats by looking at the built in algorithms and using example dataseets,plots & visualisations  
+     Data Representation project building a database to complete CRUD operations by creating and consuming RESTful APIs
     <br />
     <a href="https://github.com/colmhiggs11/Machine_Learning_21_CH"><strong>Explore the docs in Repository »</strong></a>
     <br />
@@ -40,10 +39,8 @@
 2. <a href="#2-getting-started">Getting Started</a>
     - <a href="#prerequisites">Prerequisites</a>
     - <a href="#installation">Installation</a>
-3. <a href="#3-scikit-learn">Scikit Learn</a>
-4. <a href="#4-scipy-stats">SciPy Stats</a>
-5. <a href="#5-conclusions">Conclusions</a>
-6. <a href="#6-license">License</a>
+
+3. <a href="#6-license">License</a>
 
 <!-- ABOUT THE PROJECT -->
 ## 1. About The Project
@@ -111,43 +108,7 @@ The libraries and packages that need to be installed for running this code are s
 
 ---
 
-## 3. Scikit Learn
-[![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/colmhiggs11/Machine_Learning_21_CH/blob/main/Scikit-Learn.ipynb)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/colmhiggs11/Machine_Learning_21_CH/HEAD)
-
-
-
-
-
-<div align="center">
-
-<img alt="SciKit" src="https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Images/MLProcess.jpg?raw=true" width="50%">
-
-<div align="left">
-
----
-## 4. Scipy Stats
-
- [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/colmhiggs11/Machine_Learning_21_CH/blob/main/Scipy_Stats.ipynb)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/colmhiggs11/Machine_Learning_21_CH/HEAD)
-
-
-<div align="center">
-
-<img alt="SciPy Assumptions" src="https://github.com/colmhiggs11/Machine_Learning_21_CH/blob/main/Images/ANOVA.png?raw=true" width="50%">
-
-<div align="left">
-
-
-
----
-
-## 5. Conclusions
-
-
----
-
-## 6. License
+## 3.  License
 This project was completed using the [MIT License](https://opensource.org/licenses/MIT). Due to the limited restrictions it puts on reuse, it has a high license compatibility.
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -158,6 +119,8 @@ This project was completed using the [MIT License](https://opensource.org/licens
 [issues-url]: https://github.com/colmhiggs11/data-representation-project/issues
 [license-shield]: https://img.shields.io/github/license/colmhiggs11/data-representation-project.svg?style=for-the-badge
 [license-url]: https://github.com/colmhiggs11/data-representation-project/blob/main/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=006
+[linkedin-url]: https://linkedin.com/in/colm-higgins-3a776711b
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=006
 [linkedin-url]: https://linkedin.com/in/colm-higgins-3a776711b
 [product-screenshot]: images/screenshot.png

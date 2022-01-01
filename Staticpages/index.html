@@ -4,25 +4,29 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
                 
+        <!-- Style details -->
             <style>
                     th {background-color:rgba(7, 5, 36, 0.973); text-align: center; color:rgb(255, 255, 255)}
                     td {text-align: center;}
                     #navbar {height:60px; width:100%; border-radius:5px;opacity:0.25;position:fixed;background-image:url("https://preview.pixlr.com/images/800wm/100/1/1001466917.jpg" );}
+                    #logo { mix-blend-mode: multiply; height:40px;}
 
             </style>
     </head>
 
     <body style ="background-color:rgba(114, 139, 187, 0.562)">
         
-        <!-- Main Container -->
+        <!-- Banner at the top -->
         <div id = "navbar">                           
-    
         </div>
 
-        <div id="Create-update" style ="display:none"  class="col text-center" >
-        <h2 id= "Create_Head"><b>Create Part</b></h2>
-        <h2 id= "Update_Head"><b>Update Part Details</b></h2>
         
+        <!-- Main Container -->
+        <div id="Create-update" style ="display:none"  class="col text-center"  >
+        <h2 id= "Create_Head"><img id = "logo" src="https://www.nicepng.com/png/detail/257-2577836_small-cartoon-hammer-and-screwdriver.png"><b>CREATE NEW PART</b></h2>
+        <h2 id= "Update_Head"><img id = "logo" src="https://www.nicepng.com/png/detail/257-2577836_small-cartoon-hammer-and-screwdriver.png"><b>UPDATE PART DETAILS</b></h2>
+        
+        <!-- Create Table -->
         <table id = "CreateUpdateForm" class =" table table-striped table-hover container " >
                 <tr><th>Name</th><th>Value</th></tr>
             <tr>
@@ -44,9 +48,15 @@
             <tr>
                 <td></td>
                 <td>
-                    <div class = "btn-group mr-2" role="group" aria-label="First group">
+                    <div class = "btn-group" role="group" aria-label="First group">
                         <button id ="Create-Button" onclick="doCreate()" type="button" class="btn btn-primary badge-pill">Create Part</button>
-                        <button id ="Update-Button" onclick="doUpdate()" class="btn btn-info btn-pill">Update Part</button>
+                    </div>
+
+                    <div class="btn-group mr-2" role="group" aria-label="Third group">    
+                        <button id ="Update-Button" onclick="doUpdate()" class="btn btn-info badge-pill">Update Part</button>
+                    </div>
+
+                    <div class="btn-group mr-2" role="group" aria-label="Third group">    
                         <button id="refresh-button" onclick="history.go(0)" type="button" class="btn btn-danger badge-pill">Go Back</button>
                     </div>
                 </td>
@@ -55,19 +65,21 @@
         </div>
  
         <div id = "display" class="col text-center" >
-            <h2 style ="text-align:center;color:rgba(7, 5, 36, 0.973)" > <b>Parts Stock</b></h2> 
-           
+            <h2 style ="text-align:center;color:rgba(7, 5, 36, 0.973)" ><img id = "logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeOgVx4tlQwwnRAMXx-y1tA5PWLNBsyPFLFPRHpnlfFvtqnc3orkXPRENUtF07fxlrQNc&usqp=CAU" ><b> C&M LTD PARTS DATABASE</b></h2> 
+            
+            <!-- Main Data Table -->
             <table id = partTable class = "table table-hover table-sm  ">
                 <tr>
                     <th>Part ID</th><th>Part Name</th><th>Checked in By</th><th>Quantity</th><th></th><th></th>
                 </tr>
 
             </table>
-            <button onclick="showCreate()" class="btn btn-success btn-sm btn-block badge-pill" >Add New Part</button>
+            <button onclick="showCreate()" class="btn btn-success btn-sm btn-block badge-pill">Add New Part</button>
 
         </div>
     
             <script>
+                // Selecting what is displayed (Create)
                 host = window.location.origin
                 function showCreate(){
                     console.log("Show Create")
@@ -81,6 +93,7 @@
 
                 }
 
+                // Selecting what is displayed (Update)
                 function showUpdate(thisElem){
                     console.log("Show Update")
 
@@ -96,6 +109,7 @@
                     document.getElementById('Create_Head').style.display = "none"                
                 }
                 
+                // function to get part details
                 function readpartFromRow(rowElement){
                     part = {}
                     part.part_ID = rowElement.getAttribute("id");
@@ -106,6 +120,7 @@
                     return part
                 }
 
+                // Selecting what is displayed when updating part
                 function populateForm(part){
                     var form = document.getElementById('CreateUpdateForm')
 
@@ -118,6 +133,7 @@
 
                 }
 
+                // Function to clear the form when creating new Part
                 function clearForm(){
                     var form = document.getElementById('CreateUpdateForm')
 
@@ -130,8 +146,9 @@
 
                 }
 
+                // Function to Create new Part
                 function doCreate(){
-                    console.log("Do Create")
+                    // console.log("Do Create")
 
                     part = getpartFromForm()
                     $.ajax({
@@ -145,8 +162,10 @@
                             addpartToTable(part);
                             showDisplay()
                             clearForm()
+                            // Refresh page
                             history.go(0)
                         },
+                        // Error handling
                         error:function(xhr,status, error){
                             alert("####ERROR : INCORRECT FORMAT####\n\nPossible Causes : \n- Part Number left blank \n- Already in use  \n- Non integer characters included \n\nPlease enter a part number that is not in the Database")
                             console.log ('error:'+ status + 'msg:' +error)
@@ -155,6 +174,7 @@
                     
                 }
                 
+                // Update part function
                 function doUpdate(){
                     part = getpartFromForm()
                     updateTableRow(part)
@@ -162,6 +182,7 @@
                     showDisplay()
                 }
 
+                // Updating the server
                 function updateServer(){
                     $.ajax({
                         url:"/Equipment/"+ part.part_ID,
@@ -182,6 +203,7 @@
                     })  
                 }
 
+                // Function to delete a part from the DB
                 function doDelete(thisElem){
                     var tableElement = document.getElementById('partTable');
                     var rowElement = thisElem.parentNode.parentNode;
