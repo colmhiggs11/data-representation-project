@@ -59,19 +59,21 @@ Project requires a minimum of the below:
 ### In this repository
 
 * [README.md](https://github.com/colmhiggs11/data-representation-project/blob/main/README.md) *(Layout and details of the project)*
-* [partDao.py](https://github.com/colmhiggs11/data-representation-project/blob/main/partDao.py) *(Scikit Learn Jupyter Notebook)*
+* [partDao.py](https://github.com/colmhiggs11/data-representation-project/blob/main/partDao.py) *(Python file to connect to mySQL)*
 
-* [server.py](https://github.com/colmhiggs11/data-representation-project/blob/main/server.py)  *(Scipy Stats Jupyter Notebook)*
+* [server.py](https://github.com/colmhiggs11/data-representation-project/blob/main/server.py)  *(Python file to start and run localhost Flask server)*
 
 **Other items**
 * [Staticpages](https://github.com/colmhiggs11/data-representation-project/tree/main/Staticpages)
-    * [index.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/index.html) *(Data File for the analysis of KNN algorithm)*
-    * [login.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/login.html) *(Data file for analysis in Scikit Learn)*
+    * [index.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/index.html) *(HTML interface for the database flask, CRUD operations)*
+    * [login.html](https://github.com/colmhiggs11/data-representation-project/blob/main/Staticpages/login.html) *(Login page to access the index page)*
 
-* [dbconfigtemplate.py](https://github.com/colmhiggs11/data-representation-project/blob/main/dbconfigtemplate.py)
+* [dbconfigtemplate.py](https://github.com/colmhiggs11/data-representation-project/blob/main/dbconfigtemplate.py) *(dbconfig template that can be edited to run file)*
+
 * [LICENSE](https://github.com/colmhiggs11/data-representation-project/blob/main/LICENSE) *(MIT License)*    
 * [requirments.txt](https://github.com/colmhiggs11/data-representation-project/blob/main/requirements.txt)
-* [initdb.sql](https://github.com/colmhiggs11/data-representation-project/blob/main/initdb.sql)
+* [initdb.sql](https://github.com/colmhiggs11/data-representation-project/blob/main/initdb.sql) *(mySql commands to create initial database)*
+
 * .gitignore
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -22,7 +22,7 @@ def login():
             pag.alert(text="## Incorrect Password!\nPlease try again. ##", title="Login Screen")
 
     return render_template("login.html")
-
+    
 #get all
 @app.route('/Equipment')
 def getAll():
