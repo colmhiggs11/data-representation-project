@@ -61,7 +61,7 @@ Project requires a minimum of the below:
 * [README.md](https://github.com/colmhiggs11/data-representation-project/blob/main/README.md) *(Layout and details of the project)*
 * [partDao.py](https://github.com/colmhiggs11/data-representation-project/blob/main/partDao.py) *(Python file to connect to mySQL)*
 
-* [server.py](https://github.com/colmhiggs11/data-representation-project/blob/main/server.py)  *(Python file to start and run localhost Flask server)*
+* [application.py](https://github.com/colmhiggs11/data-representation-project/blob/main/application.py)  *(Python file to start and run localhost Flask server)*
 
 **Other items**
 * [Staticpages](https://github.com/colmhiggs11/data-representation-project/tree/main/Staticpages)
@@ -76,6 +76,8 @@ Project requires a minimum of the below:
 
 * .gitignore
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+* [pythonanywhere errors](https://github.com/colmhiggs11/data-representation-project/blob/main/pythonanywhere-errors) *(Errors from trying to run python anywhere.)*
 
 ***
 
@@ -127,6 +129,10 @@ The passwords below will allow the user to move from the login page into the dat
 
 ## 3.  License
 This project was completed using the [MIT License](https://opensource.org/licenses/MIT). Due to the limited restrictions it puts on reuse, it has a high license compatibility.
+
+## Pythonsnywhere
+In the project folder [pythonanywhere errors](https://github.com/colmhiggs11/data-representation-project/blob/main/pythonanywhere-errors) the erros that were encountered when trying to host the server on pythonanywhere. 
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- <https://www.markdownguide.org/basic-syntax/#reference-style-links -->
