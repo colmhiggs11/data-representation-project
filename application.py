@@ -1,10 +1,4 @@
-from flask import (
-    Flask,
-    render_template,
-    request, 
-    abort, 
-    jsonify,
-)
+from flask import Flask, render_template, request, abort,jsonify
 import pyautogui as pag
 from partDao import partDAO
 
